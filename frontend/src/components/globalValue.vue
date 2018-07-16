@@ -1,6 +1,6 @@
 <script>
-    var baseUrl = 'http://127.0.0.1:8000/'
-    export default {
-        baseUrl
-    }
+  var baseUrl = 'http://127.0.0.1:8000/'
+  export default {
+    baseUrl
+  }
 </script>

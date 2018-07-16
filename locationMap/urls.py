@@ -4,5 +4,7 @@ from django.conf import settings
 from locationMap.views import *
 
 urlpatterns = [
-   url(r'^home$', Home.as_view()),
+   url(r'^getGw$', getGw.as_view()),
+   url(r'^getEd$', getEd.as_view()),
+   url(r'^getAllData$', getAllData.as_view()),
 ]

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import home from '@/components/home'
+import mapDemo from '@/components/mapDemo'
 
 Vue.use(Router)
 
@@ -8,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'home',
+      component: home
+    },
+    {
+      path: '/mapdemo',
+      name: 'mapDemo',
+      component: mapDemo
     }
   ]
 })

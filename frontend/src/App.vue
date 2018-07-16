@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="app">
+  <div id="app"> <!--class="container"-->
     <!--<img src="./assets/logo.png">
     <router-view/>-->
     <transition name="fade">
@@ -8,15 +8,8 @@
     </keep-alive>
   </transition>
   </div>
-</template>
+  <!--
 
-<script>
-export default {
-  name: 'App'
-}
-</script>
-
-<style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,4 +25,14 @@ export default {
   padding-bottom: 20px;
   overflow: hidden;
 }
+  -->
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+<style>
 </style>
