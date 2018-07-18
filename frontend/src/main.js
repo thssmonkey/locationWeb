@@ -4,13 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import iView from 'iview'
 import router from './router'
+import EasyScroll from 'easyscroll'
 import store from './../store/index'
 import VueResource from 'vue-resource'
 import globalValue from './components/globalValue'
-
 Vue.prototype.GLOBAL = globalValue
 Vue.config.productionTip = false
 
+Vue.use(EasyScroll)
 Vue.use(VueResource)
 Vue.use(iView)
 // 设置 POST 请求时 的 data 格式

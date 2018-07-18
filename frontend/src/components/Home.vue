@@ -70,7 +70,7 @@
              this.allDatas = res
           })
           .catch((response) => {
-            this.$Message.error('获取网关数据失败：' + response)
+            this.$Message.error('获取网关和终端节点数据失败：' + response)
           })
       }
     }
@@ -90,7 +90,7 @@
   #container{
     position: relative;
     height: 470px;
-    border: 2px solid #dddee1;
+    border: 2px solid #5a5a5a;
   }
   #left_side{
     position: absolute;
@@ -98,12 +98,12 @@
     left: 0px;
     width: 200px;
     height: 100%;
-    border: 2px solid #dddee1;
   }
   #content{
     margin: 0px 200px 0px 200px;
     height: 100%;
-    border: 2px solid #dddee1;
+    border-left: 2px solid #5a5a5a;
+    border-right: 2px solid #5a5a5a;
   }
   #right_side{
     position: absolute;
@@ -111,11 +111,9 @@
     right: 0px;
     width: 200px;
     height: 100%;
-    border: 2px solid #dddee1;
   }
   #footer{
     margin-top: 9px;
-    height: 50px;
-    border: 2px solid #dddee1;
+    height: 58px;
   }
 </style>

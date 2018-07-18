@@ -41,6 +41,8 @@
       ready () {
         // 创建地图
         var map = new BMap.Map("allmap")
+        // 设置地图风格
+        map.setMapStyle({style:'dark'})       // midnight
         // 设置地图中心点，北京市天安门
         var point = new BMap.Point(this.longitude, this.latitude)
         // 初始化地图,设置中心点坐标和地图级别
@@ -152,7 +154,7 @@
   .mapStyle {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
-    overflow:hidden;
+    border-radius: 0px;
+    overflow: hidden;
   }
 </style>
