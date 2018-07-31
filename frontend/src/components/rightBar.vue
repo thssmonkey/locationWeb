@@ -5,7 +5,7 @@
       <EasyScrollbar :barOption="barOpt">
         <div id="wrapper">
           <div v-for="(gateway, index) in rightmsgs" :key="index">
-            <Button class="btn" type="dashed" @click="checkDetails(index)">{{gateway.name}}</Button>
+            <Button class="btn" type="dashed" ghost @click="checkDetails(index)">{{gateway.name}}</Button>
           </div>
         </div>
       </EasyScrollbar>
@@ -74,7 +74,7 @@
   #container{
     position: relative;
     padding-left: 70px;
-    height: 280px;
+    height: 340px;
   }
   #footer{
     height: 135px;
@@ -91,12 +91,12 @@
     color: rgb(255, 255, 255);
   }
   #wrapper {
-    height: 270px;
+    height: 330px;
   }
   .detail-style {
-    margin: 9px 0 0 20px;
+    margin: 5px 0 0 5px;
     font-family: 'Helvetica Neue';
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
   }
   .btn {
