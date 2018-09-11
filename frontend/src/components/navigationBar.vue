@@ -47,7 +47,7 @@
   }
   .title {
     position: absolute;
-    width: 96%;
+    width: 100%;
     padding: 10px;
     font-size: 20px;
     text-align: center;
@@ -57,7 +57,7 @@
   .btn {
     position: absolute;
     top: 8px;
-    margin-left: 96%;
+    margin-left: 95%;
   }
   .spin-icon-load{
     animation: ani-demo-spin 1s linear infinite;

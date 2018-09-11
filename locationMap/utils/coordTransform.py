@@ -163,8 +163,8 @@ def out_of_china(lng, lat):
 def wgs84_to_cartesian(lng, lat):
     city = "beijing"
     Datum = 84
-    PI = 3.141592653589794
-    iPI = 0.0174532925199433 # PI/180
+    PI = math.pi
+    iPI = math.pi / 180  # PI/180
     if Datum == 84:
         a = 6378137
         f = 1 / 298.257223563
@@ -226,8 +226,8 @@ def wgs84_to_cartesian(lng, lat):
 def cartesian_to_wgs84(x, y):
     city = "beijing"
     Datum = 84
-    PI = 3.141592653589794
-    iPI = 0.0174532925199433 # PI/180
+    PI = math.pi
+    iPI = math.pi / 180  # PI/180
     if Datum == 84:
         a = 6378137
         f = 1 / 298.257223563
@@ -288,23 +288,35 @@ def cartesian_to_wgs84(x, y):
 # print(wgs84_to_cartesian(120, 41))
 # print(cartesian_to_wgs84(4548288, 336579))
 
-'''
-def wgs84_to_cartesian(lng, lat):
-    baselng = 116.3972282409668
-    baselat = 39.90960456049752
-    MACRO_AXIS = 6378.137
-    MINOR_AXIS = 6356.752
-    # gey Y
-    x0 = pow(MACRO_AXIS, 2.0) / math.sqrt(pow(MACRO_AXIS, 2.0) + pow(MINOR_AXIS, 2.0) * pow(math.tan(baselat), 2.0))
-    y0 = pow(MINOR_AXIS, 2.0) / math.sqrt(pow(MINOR_AXIS, 2.0) + pow(MACRO_AXIS, 2.0) * pow(1 / math.tan(baselat), 2.0))
-    x1 = pow(MACRO_AXIS, 2.0) / math.sqrt(pow(MACRO_AXIS, 2.0) + pow(MINOR_AXIS, 2.0) * pow(math.tan(lat), 2.0))
-    y1 = pow(MINOR_AXIS, 2.0) / math.sqrt(pow(MINOR_AXIS, 2.0) + pow(MACRO_AXIS, 2.0) * pow(1 / math.tan(lat), 2.0))
-    Y = math.sqrt(pow(x1 - x0, 2.0) + pow(y1 - y0, 2.0))
-    # get X
-    X = x0 * (lng - baselng)
-    return (X, Y)
 
-def cartesian_to_wgs84(x, y):
+'''  Warning： 经纬度没有转为弧度
+def wgs84_to_cartesian(lng, lat, alt)：
+    a = 6378137                # m
+    b = 6.356752314245179e+06  # m
+    p = math.pi / 180          # Pi/180
+    lng = lng * p
+    lat = lat * p
+    e = (pow(a, 2) - pow(b, 2)) / pow(a, 2)
+    v = a / (math.sqrt(1 - e * pow(math.sin(lng), 2)))
+    X = (v +  alt) * math.cos(lat) * math.cos(lng)
+    Y = (v + alt) * math.cos(lat) * math.sin(lng)
+    Z = (v * (1 - e) + alt) * math.sin(lat)
+    return (X, Y, Z)
+
+# z = (z1 + z2 + z3 + z4) / 4
+def cartesian_to_wgs84(x, y, z):
+    a = 6378137                # m
+    b = 6.356752314245179e+06  # m
+    p = 180 / math.pi          # Pi/180
+    e = (pow(a, 2) - pow(b, 2)) / pow(a, 2)
+    el = e / (1 - e)
+    theta = math.atan((z * a) / (p * b))
+    p = math.sqrt(pow(x, 2) + pow(y, 2))
+    lng = math.atan(y / x)
+    lat = math.atan((z + el * b * pow(math.sin(theta), 3)) / (p - e * a * pow(math.cos(theta), 3)))
+    return (lng * p, lat * p)
+
+def wgs84_to_cartesian(lng, lat):
     baselng = 116.3972282409668
     baselat = 39.90960456049752
     MACRO_AXIS = 6378.137

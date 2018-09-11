@@ -85,6 +85,7 @@
     height: 40px;
     /*background: #DCDCDC;*/
     border-bottom: 2px solid #5a5a5a;
+    margin-bottom: 12px;
     text-align: center;
     font-size: 16px;
     font-family: "微软雅黑";
@@ -94,10 +95,11 @@
     height: 330px;
   }
   .detail-style {
-    margin: 5px 0 0 5px;
+    margin: 8px 0 0 2px;
     font-family: 'Helvetica Neue';
     font-size: 10px;
     font-weight: bold;
+    color: darkslategray;
   }
   .btn {
     margin-bottom: 3px;

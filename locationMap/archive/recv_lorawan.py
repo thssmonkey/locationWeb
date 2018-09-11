@@ -79,9 +79,7 @@ def getDeviceLocation(rxInfo):
     (x1, y1) = wgs84_to_cartesian(float(gateway_json[0]['coordinate'].split(",")[0]), float(gateway_json[0]['coordinate'].split(",")[1]))
     (x2, y2) = wgs84_to_cartesian(float(gateway_json[1]['coordinate'].split(",")[0]), float(gateway_json[1]['coordinate'].split(",")[1]))
     (x3, y3) = wgs84_to_cartesian(float(gateway_json[2]['coordinate'].split(",")[0]), float(gateway_json[2]['coordinate'].split(",")[1]))
-    TDOA21 = utc_to_timestamps(gateway_json[1]['time']) - utc_to_timestamps(gateway_json[0]['time'])
-    TDOA31 = utc_to_timestamps(gateway_json[2]['time']) - utc_to_timestamps(gateway_json[0]['time'])
-    ((r1, X1, Y1), (r2, X2, Y2)) = threeAnchorCalculate(x1, y1, x2, y2, x3, y3, TDOA21, TDOA31)
+    ((r1, X1, Y1), (r2, X2, Y2)) = threeAnchorCalculate(x1, y1, x2, y2, x3, y3, utc_to_timestamps(gateway_json[0]['time']), utc_to_timestamps(gateway_json[1]['time']), utc_to_timestamps(gateway_json[2]['time']))
     edX = 0
     edY = 0
     if r1 > 0:
