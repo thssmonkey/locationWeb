@@ -1,30 +1,24 @@
 #!/usr/bin/env python3
-
 import os
+import django
+# 外来脚本加如下两句才可引用项目模块
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "locationWeb.settings")
+django.setup()
+
 import sys
 import json
-#from Logger import Logger
+from locationMap.archive.Logger import Logger
 from flask import Flask, request
-sys.path.append("..")
 from locationMap.models import *
 from django.db.models import Q
-from utils.timeTransform import utc_to_timestamps
-from utils.location import threeAnchorCalculate
-from utils.coordTransform import wgs84_to_bd09, wgs84_to_cartesian, cartesian_to_wgs84
+from locationMap.utils.timeTransform import utc_to_timestamps
+from locationMap.utils.location import threeAnchorCalculate
+from locationMap.utils.coordTransform import wgs84_to_bd09, wgs84_to_cartesian, cartesian_to_wgs84
 
-from datetime import datetime
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import mixins
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.hashers import make_password, check_password
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 GLOBAL = json.loads(open(os.path.join(BASE_DIR, 'global.json')).read())
 
-logs_path = 'logs/'
+logs_path = 'archive/logs/'
 if not os.path.exists(logs_path):
     os.makedirs(logs_path)
 
@@ -58,9 +52,10 @@ def loranode():
                     else:
                         EndDevice.objects.get(eid=['eid']).update(name=ed['name'], coordinate=ed['coordinate'])
             # 记录在log日志中
-            #devide_path = mjson['devEUI'] + '.log'
-            #device_logger = Logger(devide_path, logfile=logs_path + devide_path).get_logger()
-            #device_logger.info(mjson)
+            # devide_path = mjson['devEUI'] + '.log'
+            devide_path = mjson['deviceName'] + '.log'
+            device_logger = Logger(devide_path, logfile=logs_path + devide_path).get_logger()
+            device_logger.info(mjson)
             return 'OK'
         else:
             return mjson

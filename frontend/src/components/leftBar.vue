@@ -100,6 +100,6 @@
   }
   .btn {
     margin-bottom: 3px;
-    color: rgb(204, 204, 204);
+    color: black;
   }
 </style>

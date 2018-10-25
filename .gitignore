@@ -66,6 +66,7 @@ target/
 
 # Custom files
 /configs.json
+/global.json
 
 # frontend
 frontend/node_modules
@@ -73,6 +74,7 @@ frontend/node_modules
 # locationMap
 locationMap/__pycache__
 locationMap/migrations
+locationMap/archive
 
 # locationWeb
 locationWeb/__pycache__

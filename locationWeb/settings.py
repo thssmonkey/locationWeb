@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'locationMap',
+    'locationWeb',
 ]
 
 MIDDLEWARE = [

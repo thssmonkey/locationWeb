@@ -11,9 +11,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from utils.timeTransform import utc_to_timestamps
-from utils.location import threeAnchorCalculate
-from utils.coordTransform import wgs84_to_bd09, wgs84_to_cartesian, cartesian_to_wgs84
+# from utils.timeTransform import utc_to_timestamps
+# from utils.location import threeAnchorCalculate
+# from utils.coordTransform import wgs84_to_bd09, wgs84_to_cartesian, cartesian_to_wgs84
 
 ## gateway location(km)
 '''
