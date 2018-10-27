@@ -7,7 +7,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.core import serializers
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -72,29 +72,41 @@ def getDeviceLocation(rxInfo):
     for ed in enddevice_json:
         lng, lat = wgs84_to_bd09(float(ed['coordinate'].split(",")[0]), float(ed['coordinate'].split(",")[1]))
         ed['coordinate'] = str(lng) + ',' + str(lat)
-'''
+        
 gateway_json = [{'gid': 1, 'name': 'lora-gw1', 'coordinate': '102.6570,24.9889'},
                 {'gid': 2, 'name': 'lora-gw2', 'coordinate': '102.706879,25.049358'},
                 {'gid': 3, 'name': 'lora-gw3', 'coordinate': '102.74032,25.012774'}]
 enddevice_json = [{'eid': 1, 'name': 'end-device1', 'coordinate': '102.67065001365012,25.00255001365013'},
                 {'eid': 2, 'name': 'end-device2', 'coordinate': '102.714763,25.029774'}]
+'''
 
 # Create your views here.
 # get gateway data
 class getGw(APIView):
     def get(self, request):
-        gateway_set = GateWay.objects.all()
+        gateway_set = json.loads(serializers.serialize('json', GateWay.objects.all()))
+        gateway_json = []
+        for gw in gateway_set:
+            gateway_json.append(gw["fields"])
         return Response(gateway_json, status=status.HTTP_200_OK)
 
 # get end-device data
 class getEd(APIView):
     def get(self, request):
-        enddevice_set = EndDevice.objects.all()
+        enddevice_set = json.loads(serializers.serialize('json', EndDevice.objects.all()))
+        enddevice_json = []
+        for ed in enddevice_set:
+            enddevice_json.append(ed["fields"])
         return Response(enddevice_json, status=status.HTTP_200_OK)
 
 # get gateway and end-device data
 class getAllData(APIView):
     def get(self, request):
-        gateway_set = GateWay.objects.all()
-        enddevice_set = EndDevice.objects.all()
-        return Response(gateway_json + enddevice_json, status=status.HTTP_200_OK)
+        gateway_set = json.loads(serializers.serialize('json', GateWay.objects.all()))
+        enddevice_set = json.loads(serializers.serialize('json', EndDevice.objects.all()))
+        all_json = []
+        for gw in gateway_set:
+            all_json.append(gw["fields"])
+        for ed in enddevice_set:
+            all_json.append(ed["fields"])
+        return Response(all_json, status=status.HTTP_200_OK)
